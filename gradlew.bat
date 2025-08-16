@@ -1,3 +1,6 @@
 @echo off
+set DEFAULT_JVM_OPTS=
 set DIR=%~dp0
-java -Xmx64m -cp "%DIR%gradle\wrapper\gradle-wrapper.jar" org.gradle.wrapper.GradleWrapperMain %*
+set GRADLE_WRAPPER_DIR=%DIR%\gradle\wrapper
+
+java %DEFAULT_JVM_OPTS% -cp "%GRADLE_WRAPPER_DIR%\gradle-wrapper.jar" org.gradle.wrapper.GradleWrapperMain %*
