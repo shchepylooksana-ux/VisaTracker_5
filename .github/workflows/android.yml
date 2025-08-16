@@ -11,23 +11,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Крок 1: Завантажуємо код із репозиторію
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
+      # Крок 2: Встановлюємо JDK 17 (потрібний для Android Gradle Plugin)
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
+      # Крок 3: Дозволяємо виконання gradlew
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
+      # Крок 4: Збираємо APK (debug)
       - name: Build with Gradle
-        run: bash ./gradlew assembleDebug
+        run: ./gradlew assembleDebug
 
+      # Крок 5: Завантажуємо зібраний APK як артефакт
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
-          name: app-debug-apk
+          name: app-debug
           path: app/build/outputs/apk/debug/app-debug.apk
